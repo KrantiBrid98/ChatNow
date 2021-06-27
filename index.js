@@ -4,6 +4,7 @@ const app = express();
 const server = http.createServer(app);
 const {Server} = require('socket.io')
 const io = new Server(server)
+let port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 
@@ -16,6 +17,6 @@ io.on('connection', (socket) => { // listen on the connection event for incoming
         console.log('user disconnected');
     })
 })
-server.listen(3000, ()=>{
+server.listen(port, ()=>{
     console.log("server listening on port 3000")
 })
