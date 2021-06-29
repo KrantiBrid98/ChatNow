@@ -16,6 +16,9 @@ io.on('connection', (socket) => { // listen on the connection event for incoming
     socket.on('disconnect', () => {
         console.log('user disconnected');
     })
+    socket.on('typing', () => {
+        socket.broadcast.emit('typing', 'Typing...'); // to emit the typing event to everyone except the user typing
+    })
 })
 server.listen(port, ()=>{
     console.log("server listening on port 3000")

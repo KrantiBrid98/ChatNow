@@ -14,10 +14,12 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
+      #typing-text { position: fixed; bottom: 55px; left: 15px; color: darkgrey;}
     </style>
   </head>
   <body>
     <ul id="messages"></ul>
+    <div id="typing-text"></div>
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
@@ -35,6 +37,19 @@
         window.scrollTo(0, document.body.scrollHeight);
      });
 
+    socket.on('typing', function(msg) {
+        let typingDiv = document.getElementById('typing-text')
+        typingDiv.textContent = msg;
+        messages.appendChild(typingDiv);
+        setTimeout(() => {
+          typingDiv.textContent = "";
+          messages.appendChild(typingDiv);
+        }, 3000);
+     });
+
+    input.addEventListener('input', function(e, value) {
+      socket.emit('typing')
+    })
     form.addEventListener('submit', function(e){
         e.preventDefault();
         if(input.value) {
