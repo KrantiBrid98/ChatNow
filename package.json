@@ -1,14 +1,18 @@
 {
+  "homepage": "https://krantibrid98.github.io/memoryGame/",
   "name": "chatapp",
   "version": "1.0.0",
   "description": "chat app",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
+    "gh-pages": "^5.0.0",
     "socket.io": "^4.1.2"
   },
-  "devDependencies": {},
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
